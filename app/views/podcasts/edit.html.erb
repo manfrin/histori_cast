@@ -1,6 +1,5 @@
-<h1>Editing podcast</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @podcast %> |
-<%= link_to 'Back', podcasts_path %>
+<%- model_class = Podcast -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => Podcast %></h1>
+</div>
+<%= render :partial => 'form' %>
