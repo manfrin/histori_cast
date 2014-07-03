@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :podcasts
+
   resources :episodes
 
   devise_for :admin_users, ActiveAdmin::Devise.config
