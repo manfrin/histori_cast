@@ -1,29 +1,38 @@
-<h1>Listing episodes</h1>
-
-<table>
+<%- model_class = Episode -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Episode %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Episode number</th>
-      <th>Podcast</th>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:episode_number) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @episodes.each do |episode| %>
       <tr>
+        <td><%= episode.id %></td>
         <td><%= episode.title %></td>
         <td><%= episode.episode_number %></td>
-        <td><%= episode.podcast %></td>
-        <td><%= link_to 'Show', episode %></td>
-        <td><%= link_to 'Edit', edit_episode_path(episode) %></td>
-        <td><%= link_to 'Destroy', episode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l episode.created_at, format: :long %></td>
+        <td>
+          <%= link_to episode_path(episode), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to episode_path(episode), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Episode', new_episode_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_episode_path,
+            :class => 'btn btn-primary' %>

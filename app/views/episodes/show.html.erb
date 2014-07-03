@@ -1,19 +1,26 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Episode -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Episode %></h1>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @episode.title %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:title) %></dt>
+      <dd><pre class="prettyprint"><%= @episode.title %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:episode_number) %></dt>
+      <dd><pre class="prettyprint"><%= @episode.episode_number %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>Episode number:</strong>
-  <%= @episode.episode_number %>
-</p>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              episodes_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_episode_path(@episode), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              episode_path(@episode),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
 
-<p>
-  <strong>Podcast:</strong>
-  <%= @episode.podcast %>
-</p>
-
-<%= link_to 'Edit', edit_episode_path(@episode) %> |
-<%= link_to 'Back', episodes_path %>
