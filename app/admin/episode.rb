@@ -1,4 +1,5 @@
 ActiveAdmin.register Episode do
+  permit_params :title, :episode_number
 
   
   # See permitted parameters documentation:
